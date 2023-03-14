@@ -1,6 +1,5 @@
 package org.example;
 
-
 import org.eclipse.basyx.submodel.metamodel.api.identifier.IdentifierType;
 import org.eclipse.basyx.submodel.metamodel.map.Submodel;
 import org.eclipse.basyx.submodel.metamodel.map.identifier.Identifier;
@@ -40,66 +39,66 @@ public class Nameplate {
                 digitalNameplate.setSerialNumber("1234733");
 
             //URIOfTheProduct
-                digitalNameplate.addSubmodelElement(new Property("URIOfTheProduct","TEXT"));
+                digitalNameplate.addSubmodelElement(new Property("URIOfTheProduct","ABB IRB 4400"));
 
 
         //Adding additional Properties to SM DigitalNameplate:
 
             //ManufacturerProductRoot
                 MultiLanguageProperty mlp_ManufacturerProductRoot = new MultiLanguageProperty("ManufacturerProductRoot");
-                mlp_ManufacturerProductRoot.setValue(new LangStrings("de","TEXT"));
+                mlp_ManufacturerProductRoot.setValue(new LangStrings("de","N/A"));
                 mlp_ManufacturerProductRoot.setDescription(new LangStrings("de","ManufacturerProductRoot"));
                 digitalNameplate.addSubmodelElement(mlp_ManufacturerProductRoot);
 
             //ManufacturerProductType
                 MultiLanguageProperty mlp_ManufacturerProductType = new MultiLanguageProperty("ManufacturerProductType");
-                mlp_ManufacturerProductType.setValue(new LangStrings("de","TEXT"));
+                mlp_ManufacturerProductType.setValue(new LangStrings("de","Industrieroboter"));
                 mlp_ManufacturerProductType.setDescription(new LangStrings("de","ManufacturerProductType"));
                 digitalNameplate.addSubmodelElement(mlp_ManufacturerProductType);
 
             //OrderCodeofManufacturer
                 MultiLanguageProperty mlp_OrderCodeofManufacturer = new MultiLanguageProperty("OrderCodeofManufacturer");
-                mlp_OrderCodeofManufacturer.setValue(new LangStrings("de","TEXT"));
+                mlp_OrderCodeofManufacturer.setValue(new LangStrings("de","3HAC020536-005"));
                 mlp_OrderCodeofManufacturer.setDescription(new LangStrings("de","OrderCodeofManufacturer"));
                 digitalNameplate.addSubmodelElement(mlp_OrderCodeofManufacturer);
 
             //ProductArticleNumberOfManufacturer
                 MultiLanguageProperty mlp_ProductArticleNumberOfManufacturer = new MultiLanguageProperty("ProductArticleNumberOfManufacturer");
-                mlp_ProductArticleNumberOfManufacturer.setValue(new LangStrings("de","TEXT"));
+                mlp_ProductArticleNumberOfManufacturer.setValue(new LangStrings("de","IRB 4400"));
                 mlp_ProductArticleNumberOfManufacturer.setDescription(new LangStrings("de","ProductArticleNumberOfManufacturer"));
                 digitalNameplate.addSubmodelElement(mlp_ProductArticleNumberOfManufacturer);
 
             //DateOfManufacture
-                LocalDate digitalNameplate_dateOfManufacture = LocalDate.of(2021,8,24);
+                LocalDate digitalNameplate_dateOfManufacture = LocalDate.of(2022,6,24);
                 Property property_digitalNameplate_DateOfManufacture = new Property("dateOfManufacture",digitalNameplate_dateOfManufacture.toString());
                 digitalNameplate.addSubmodelElement(property_digitalNameplate_DateOfManufacture);
 
             //HardwareVersion
                 MultiLanguageProperty mlp_HardwareVersion = new MultiLanguageProperty("HardwareVersion");
-                mlp_HardwareVersion.setValue(new LangStrings("de","v1.0.0"));
+                mlp_HardwareVersion.setValue(new LangStrings("de","IRB 4400/60"));
                 mlp_HardwareVersion.setDescription(new LangStrings("de","Hardware Version"));
                 digitalNameplate.addSubmodelElement(mlp_HardwareVersion);
 
             //FirmwareVersion
                 MultiLanguageProperty mlp_FirmwareVersion = new MultiLanguageProperty("FirmwareVersion");
-                mlp_FirmwareVersion.setValue(new LangStrings("en","v1.0.0"));
-                mlp_FirmwareVersion.setDescription(new LangStrings("en","Firmware Version"));
+                mlp_FirmwareVersion.setValue(new LangStrings("de","N/A"));
+                mlp_FirmwareVersion.setDescription(new LangStrings("de","Firmware Version"));
                 digitalNameplate.addSubmodelElement(mlp_FirmwareVersion);
 
             //SoftwareVersion
                 MultiLanguageProperty mlp_SoftwareVersion = new MultiLanguageProperty("SoftwareVersion");
-                mlp_SoftwareVersion.setValue(new LangStrings("en", "v1.2.3"));
-                mlp_SoftwareVersion.setDescription(new LangStrings("en", "Software version"));
+                mlp_SoftwareVersion.setValue(new LangStrings("de", "N/A"));
+                mlp_SoftwareVersion.setDescription(new LangStrings("de", "Software version"));
                 digitalNameplate.addSubmodelElement(mlp_SoftwareVersion);
 
             //CountryOfOrigin
                 MultiLanguageProperty mlp_CountryOfOrigin = new MultiLanguageProperty("CountryOfOrigin");
-                mlp_CountryOfOrigin.setValue(new LangStrings("en", "Land"));
-                mlp_CountryOfOrigin.setDescription(new LangStrings("en", "Country of Origin"));
+                mlp_CountryOfOrigin.setValue(new LangStrings("de", "Deutschland"));
+                mlp_CountryOfOrigin.setDescription(new LangStrings("de", "Herstellungsland"));
                 digitalNameplate.addSubmodelElement(mlp_CountryOfOrigin);
 
-            //CompanyLogo
 
+         //Create multiple SMC for DigitalNameplate
 
             //SMC Marking
                 SubmodelElementCollection markings = new SubmodelElementCollection("Markings");
@@ -124,43 +123,43 @@ public class Nameplate {
         //add Properties for SMC ContactInformation01:
 
             //RoleOfContactPerson
-                contactInformation01.addSubmodelElement(new Property("RoleOfContactPerson","TEXT(IRDI)"));
+                contactInformation01.addSubmodelElement(new Property("RoleOfContactPerson","0173-1#07-AAS927#001"));
             //NationalCode
                 contactInformation01.addSubmodelElement(new Property("NationalCode","DE"));
             //Language
                 contactInformation01.addSubmodelElement(new Property("Language","DE"));
             //TimeZone
-                contactInformation01.addSubmodelElement(new Property("TimeZone","text"));
+                contactInformation01.addSubmodelElement(new Property("TimeZone","Z+1"));
             //CityTown
-                contactInformation01.addSubmodelElement(new Property("CityTown","text"));
+                contactInformation01.addSubmodelElement(new Property("CityTown","Friedberg"));
             //Company
-                contactInformation01.addSubmodelElement(new Property("Company","text"));
+                contactInformation01.addSubmodelElement(new Property("Company","Friedberg"));
             //Department
-                contactInformation01.addSubmodelElement(new Property("Department","text"));
+                contactInformation01.addSubmodelElement(new Property("Department","Administration"));
             //Street
-                contactInformation01.addSubmodelElement(new Property("Street","text"));
+                contactInformation01.addSubmodelElement(new Property("Street","Grüner Weg 6"));
             //Zipcode
-                contactInformation01.addSubmodelElement(new Property("Zipcode","text"));
+                contactInformation01.addSubmodelElement(new Property("Zipcode","61169"));
             //POBox
-                contactInformation01.addSubmodelElement(new Property("POBox","text"));
+                contactInformation01.addSubmodelElement(new Property("POBox","N/A"));
             //ZipCodeofPOBox
-                contactInformation01.addSubmodelElement(new Property("ZipCodeofPOBox","text"));
+                contactInformation01.addSubmodelElement(new Property("ZipCodeofPOBox","N/A"));
             //StateCounty
-                contactInformation01.addSubmodelElement(new Property("StateCounty","text"));
+                contactInformation01.addSubmodelElement(new Property("StateCounty","Hessen"));
             //NameOfContact
-                contactInformation01.addSubmodelElement(new Property("NameOfContact","text"));
+                contactInformation01.addSubmodelElement(new Property("NameOfContact","N/A"));
             //FirstName
-                contactInformation01.addSubmodelElement(new Property("FirstName","text"));
+                contactInformation01.addSubmodelElement(new Property("FirstName","N/A"));
             //MiddleNames
-                contactInformation01.addSubmodelElement(new Property("MiddleNames","text"));
+                contactInformation01.addSubmodelElement(new Property("MiddleNames","N/A"));
             //Title
-                contactInformation01.addSubmodelElement(new Property("Title","text"));
+                contactInformation01.addSubmodelElement(new Property("Title","N/A"));
             //AcademicTitle
-                contactInformation01.addSubmodelElement(new Property("AcademicTitle","text"));
+                contactInformation01.addSubmodelElement(new Property("AcademicTitle","N/A"));
             //FurtherDetailsOfContact
-                contactInformation01.addSubmodelElement(new Property("FurtherDetailsOfContact","text"));
+                contactInformation01.addSubmodelElement(new Property("FurtherDetailsOfContact","N/A"));
             //AddressOfAdditionalLink
-                contactInformation01.addSubmodelElement(new Property("AddressOfAdditionalLink","text"));
+                contactInformation01.addSubmodelElement(new Property("AddressOfAdditionalLink","N/A"));
 
             //SCM Phone01
                 SubmodelElementCollection phone01 = new SubmodelElementCollection("Phone01");
@@ -176,9 +175,9 @@ public class Nameplate {
         //add Properties for SMC phone01:
 
             //TelephoneNumber
-                phone01.addSubmodelElement(new Property("TelephoneNumber","text"));
+                phone01.addSubmodelElement(new Property("TelephoneNumber","+496031850"));
             //TypeOfTelephone
-                phone01.addSubmodelElement(new Property("TypeOfTelephone","ENUMERATION SIEHE DOKUMENT"));
+                phone01.addSubmodelElement(new Property("TypeOfTelephone","0173-1#07-AAS754#001"));
             //AvailableTime
                 MultiLanguageProperty mlp_Phone01_AvailableTime01 = new MultiLanguageProperty("AvailableTime");
                 //AvailableTime - add Value in de & en
@@ -201,9 +200,9 @@ public class Nameplate {
         //add Properties for SMC fax01:
 
             //FaxNumber
-                fax01.addSubmodelElement(new Property("FaxNumber","text"));
+                fax01.addSubmodelElement(new Property("FaxNumber","N/A"));
             //TypeOfFaxNumber
-                fax01.addSubmodelElement(new Property("TypeOfFaxNumber","ENNUMERATION"));
+                fax01.addSubmodelElement(new Property("TypeOfFaxNumber","N/A"));
 
         //add fax01 SMC to contactInformation01
             contactInformation01.addSubmodelElement(fax01);
@@ -214,9 +213,9 @@ public class Nameplate {
         //add Properties for SMC eMail01:
 
             //EmailAdress
-                eMail01.addSubmodelElement(new Property("EmailAdress","text"));
+                eMail01.addSubmodelElement(new Property("EmailAdress","roboterservice@de.abb.com"));
             //TypeOfEmailAdress
-                eMail01.addSubmodelElement(new Property("TypeOfEmailAdress","ENNUMERATION"));
+                eMail01.addSubmodelElement(new Property("TypeOfEmailAdress","0173-1#07-AAS754#001"));
 
         //add eMail01 SMC to contactInformation01
             contactInformation01.addSubmodelElement(eMail01);
@@ -226,9 +225,9 @@ public class Nameplate {
         //add Properties for SMC ipCommunication01:
 
             //AddressOfAdditionalLink
-                ipCommunication01.addSubmodelElement(new Property("AddressOfAdditionalLink","text"));
+                ipCommunication01.addSubmodelElement(new Property("AddressOfAdditionalLink","https://new.abb.com/products/de/3HAC020536-005/irb-4400"));
             //TypeOfEmailCommunication
-                ipCommunication01.addSubmodelElement(new Property("TypeOfEmailCommunication","ENNUMERATION"));
+                ipCommunication01.addSubmodelElement(new Property("TypeOfEmailCommunication","N/A"));
             //AvailableTime
                 MultiLanguageProperty mlp_IPCommunication_AvailableTime01 = new MultiLanguageProperty("AvailableTime");
                 //AvailableTime - add Value in de & en
@@ -268,10 +267,10 @@ public class Nameplate {
         //add Properties for SMC Marking01:
 
             //MarkingName
-                marking01.addSubmodelElement(new Property("MarkingName","text"));
+                marking01.addSubmodelElement(new Property("MarkingName","N/A"));
 
             //MarkingName
-                marking01.addSubmodelElement(new Property("DesignationOfCertificateOrApproval","IRDI"));
+                marking01.addSubmodelElement(new Property("DesignationOfCertificateOrApproval","N/A"));
 
             //IssueDate
                 LocalDate marking01_IssueDate = LocalDate.of(2021,8,24);
@@ -286,7 +285,7 @@ public class Nameplate {
             //MarkingFile
 
             //MarkingAdditionalText01
-                marking01.addSubmodelElement(new Property("MarkingAdditionalText01","TEXT"));
+                marking01.addSubmodelElement(new Property("MarkingAdditionalText01","N/A"));
 
         //add Marking SMC to Markings
             markings.addSubmodelElement(marking01);
@@ -301,11 +300,9 @@ public class Nameplate {
 
     //---------------------------------------------------------SMC assetSpecificProperties start--------------------------------------------
 
-    // SCM: Markings
+    // SCM: assetSpecificProperties
 
-        //add Properties for SMC Markings:
-
-
+        //add Properties for SMC assetSpecificProperties
 
 
         //add SMC to the SM:
@@ -319,11 +316,6 @@ public class Nameplate {
 
 return digitalNameplate;
 
+                              }
 
-
-
-    }
-
-
-
-}
+                                    }
