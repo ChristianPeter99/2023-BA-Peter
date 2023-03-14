@@ -1,0 +1,49 @@
+package org.example;
+
+import org.eclipse.basyx.aas.manager.ConnectedAssetAdministrationShellManager;
+import org.eclipse.basyx.aas.metamodel.api.parts.asset.AssetKind;
+import org.eclipse.basyx.aas.metamodel.map.AssetAdministrationShell;
+import org.eclipse.basyx.aas.metamodel.map.parts.Asset;
+import org.eclipse.basyx.aas.registration.proxy.AASRegistryProxy;
+import org.eclipse.basyx.submodel.metamodel.api.identifier.IdentifierType;
+import org.eclipse.basyx.submodel.metamodel.map.Submodel;
+import org.eclipse.basyx.submodel.metamodel.map.identifier.Identifier;
+
+public class Main {
+    public static void main (String [] args ){
+
+
+//starts the AAS server -> port: http://localhost:4001/aasServer/shells
+        AAS_Infrastructure_Setup.startAASServer();
+
+//starts the AAS registry -> port: http://localhost:4002/registry/api/v1/registry
+        AAS_Infrastructure_Setup.startRegistry();
+
+//create ConnectedAssetAdministrationShellManager
+        ConnectedAssetAdministrationShellManager manager = new ConnectedAssetAdministrationShellManager(new AASRegistryProxy("http://localhost:4002/registry"));
+
+//create Asset
+        Asset asset = new Asset("MyAsset", new Identifier(IdentifierType.CUSTOM,"ID_MyAsset"), AssetKind.INSTANCE);
+
+        AssetAdministrationShell aas_test = new AssetAdministrationShell("MYAAS" ,new Identifier(IdentifierType.CUSTOM,"ID_MyAAS"),asset);
+
+//add to Server
+        manager.createAAS(aas_test,"http://localhost:4001/aasServer");
+
+//add Submodel Teechnical Data from Class
+
+        Submodel sm_TechnicalData = TechnicalData.createSubmodelTechnicalData();
+
+        manager.createSubmodel(aas_test.getIdentification(), sm_TechnicalData);
+
+//add Submodel Nameplate
+
+        Submodel sm_Nameplate = Nameplate.createSubmodelNameplate();
+
+        manager.createSubmodel(aas_test.getIdentification(), sm_Nameplate);
+
+    }
+}
+
+
+
