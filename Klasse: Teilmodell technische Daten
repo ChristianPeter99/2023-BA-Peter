@@ -1,1 +1,520 @@
+package org.example;
 
+import org.eclipse.basyx.submodel.metamodel.api.identifier.IIdentifier;
+import org.eclipse.basyx.submodel.metamodel.api.identifier.IdentifierType;
+import org.eclipse.basyx.submodel.metamodel.api.qualifier.qualifiable.IQualifier;
+import org.eclipse.basyx.submodel.metamodel.api.reference.IKey;
+import org.eclipse.basyx.submodel.metamodel.api.reference.IReference;
+import org.eclipse.basyx.submodel.metamodel.api.reference.enums.KeyElements;
+import org.eclipse.basyx.submodel.metamodel.map.Submodel;
+import org.eclipse.basyx.submodel.metamodel.map.identifier.Identifier;
+import org.eclipse.basyx.submodel.metamodel.map.qualifier.HasSemantics;
+import org.eclipse.basyx.submodel.metamodel.map.qualifier.Identifiable;
+import org.eclipse.basyx.submodel.metamodel.map.qualifier.LangString;
+import org.eclipse.basyx.submodel.metamodel.map.qualifier.LangStrings;
+import org.eclipse.basyx.submodel.metamodel.map.reference.Reference;
+import org.eclipse.basyx.submodel.metamodel.map.submodelelement.SubmodelElementCollection;
+import org.eclipse.basyx.submodel.metamodel.map.submodelelement.dataelement.File;
+import org.eclipse.basyx.submodel.metamodel.map.submodelelement.dataelement.MultiLanguageProperty;
+import org.eclipse.basyx.submodel.metamodel.map.submodelelement.dataelement.property.Property;
+import org.eclipse.basyx.submodel.metamodel.map.submodelelement.dataelement.property.valuetype.ValueType;
+import org.eclipse.basyx.submodel.metamodel.map.submodelelement.dataelement.range.Range;
+import org.eclipse.basyx.submodel.metamodel.map.submodelelement.dataelement.range.RangeValue;
+import org.eclipse.basyx.submodel.types.technicaldata.TechnicalDataSubmodel;
+
+import java.time.LocalDate;
+import java.util.List;
+
+public class TechnicalData {
+
+    public static Submodel createSubmodelTechnicalData() {
+
+
+    //Submodel: technicalData
+
+        Submodel technicalData = new Submodel("TechnicalData",new Identifier(IdentifierType.CUSTOM,"Identifier_SM_TechnicalData"));
+
+        //add Properties for SM technicalData:
+
+            //SMC GeneralInformation
+                SubmodelElementCollection generalInformation = new SubmodelElementCollection("GeneralInformation");
+            //SMC ProductClassification
+                SubmodelElementCollection productClassification = new SubmodelElementCollection("ProductClassification");
+            //FurtherInformation
+                SubmodelElementCollection furtherInformation = new SubmodelElementCollection("FurtherInformation");
+            //TechnicalProperties
+                SubmodelElementCollection technicalProperties = new SubmodelElementCollection("TechnicalProperties");
+
+    //SMC: generalInformation
+
+        //add Properties for SMC generalInformation
+
+            //ManufacturerName
+                Property manufacuterName = new Property("Manufacturer name","ABB");
+                Reference semanticId_manufacutrerName = new Reference(new Identifier(IdentifierType.IRDI,"0173-1#02-AAO677#002"), KeyElements.CONCEPTDESCRIPTION,true);
+                manufacuterName.setSemanticId(semanticId_manufacutrerName);
+                generalInformation.addSubmodelElement(manufacuterName);
+                
+
+            //ManufacturerProductDesign
+                MultiLanguageProperty mlp_ManufacturerProductDesign = new MultiLanguageProperty("MLP_ManufacturerProductDesign");
+                    //ManufacturerProductDesign - add Value in de & en
+                        LangStrings manufacturerProductDesignValue = new LangStrings(new LangString("de","Allround-Roboter für Handhabungs- und Bearbeitungsaufgaben"));
+                        manufacturerProductDesignValue.add(new LangString("en","All-round robot for handling and machining tasks"));
+                    //ManufacturerProductDesign - add Description in de & en
+                        LangStrings manufacturerProductDesignDescription = new LangStrings(new LangString("de","HerstellerProduktDesign"));
+                        manufacturerProductDesignDescription.add(new LangString("en","ManufacturerProductDesign"));
+                    //ManufacturerProductDesign - add Value & Description to MLP
+                        mlp_ManufacturerProductDesign.setValue(manufacturerProductDesignValue);
+                        mlp_ManufacturerProductDesign.setDescription(manufacturerProductDesignDescription);
+                    //ManufacturerProductDesign - add MLP to SMC Phone01
+                        generalInformation.addSubmodelElement(mlp_ManufacturerProductDesign);
+            //ManufacturerArticleNumber
+                generalInformation.addSubmodelElement(new Property("Manufacturer Article Number","ABB IRB 4400"));
+            //ManufacturerOrderCode
+                generalInformation.addSubmodelElement(new Property("Manufacturer Order Code","3HAC020536-005"));
+            //ProductImage
+
+        //add SMC generalInformation to SM technicalData
+        technicalData.addSubmodelElement(generalInformation);
+
+    //SMC: productClassification
+
+        //add Properties for SMC generalInformation
+
+            //SMC ProductClassificationItem01
+                SubmodelElementCollection productClassificationItem01 = new SubmodelElementCollection("ProductClassificationItem01");
+
+    //SMC: ProductClassificationItem01
+
+        //add Properties for SMC productClassificationItem01
+
+            //ProductClassificationSystem
+                productClassificationItem01.addSubmodelElement(new Property("ProductClassificationSystem","ECLASS"));
+            //ClassificationSystemVersion
+                productClassificationItem01.addSubmodelElement(new Property("ClassificationSystemVersion","13.0"));
+            //ProductClassId
+                productClassificationItem01.addSubmodelElement(new Property("ProductClassId","0173-1#01-AAZ344#018"));
+
+        //add SMC productClassificationItem01 to SMC productClassification
+            productClassification.addSubmodelElement(productClassificationItem01);
+
+        //add SMC productClassification to SM technicalData
+            technicalData.addSubmodelElement(productClassification);
+
+    //SMC: FurtherInformation
+
+        //add Properties for SMC FurtherInformation
+
+            //TextStatement01
+                MultiLanguageProperty mlp_TextStatement01 = new MultiLanguageProperty("MLP_TextStatement01");
+                //TextStatement01 - add Value in de & en
+                    LangStrings textStatement01Value = new LangStrings(new LangString("de","Der IRB 4400 ist ein schneller und kompakter Allround-Roboter für Handhabungs- und Bearbeitungsaufgaben. Die Traglast von bis zu 60 kg bei sehr hohen Geschwindigkeiten ermöglicht unter anderem die gleichzeitige Handhabung von zwei Teilen."));
+                    textStatement01Value.add(new LangString("en","The IRB 4400 is a fast and compact all-round robot for handling and machining tasks. The payload of up to 60 kg at very high speeds enables, among other things, the simultaneous handling of two parts."));
+                //TextStatement01 - add Description in de & en
+                    LangStrings textStatement01Description = new LangStrings(new LangString("de","Erklärung"));
+                    textStatement01Description.add(new LangString("en","TextStatement"));
+                //TextStatement01 - add Value & Description to MLP
+                    mlp_ManufacturerProductDesign.setValue(textStatement01Value);
+                    mlp_ManufacturerProductDesign.setDescription(textStatement01Description);
+                //TextStatement01 - add MLP to SMC furtherInformation
+                    furtherInformation.addSubmodelElement(mlp_TextStatement01);
+
+            //ValidDate
+                LocalDate furtherInformation_ValidDate = LocalDate.of(2022,6,24);
+                Property property_furtherInformation_ValidDate = new Property("dateOfManufacture",furtherInformation_ValidDate.toString());
+                furtherInformation.addSubmodelElement(property_furtherInformation_ValidDate);
+
+         //add SMC FurtherInformation to SM technicalData
+            technicalData.addSubmodelElement(furtherInformation);
+
+
+    //SMC: technicalProperties
+
+        //add Properties for SMC technicalProperties
+
+            //SMC MainSection_technicalProperties
+                SubmodelElementCollection mainSection_technicalProperties = new SubmodelElementCollection("Main Section of technicalProperties");
+            //SMC SubSection_technicalProperties
+                SubmodelElementCollection subSection_technicalProperties = new SubmodelElementCollection("Sub Section of technicalProperties");
+
+    //SMC: mainSection_technicalProperties
+
+        //add Properties for SMC mainSection_technicalProperties
+
+            //SMC mechanicalData
+                SubmodelElementCollection mechanicalData = new SubmodelElementCollection("Mechanical Data");
+            //SMC electricalData
+                SubmodelElementCollection electricalData = new SubmodelElementCollection("Electrical Data");
+            
+
+    //SCM: mechanicalData
+
+        //add Properties for SMC mechanicalData
+
+            //SMC colors
+                SubmodelElementCollection mechanicalData_colors = new SubmodelElementCollection("Colors");
+            //SMC dimensions
+                SubmodelElementCollection mechanicalData_dimensions = new SubmodelElementCollection("Dimensions");
+            //SMC axles
+                SubmodelElementCollection mechanicalData_axles = new SubmodelElementCollection("axles");
+            //weight
+                mechanicalData.addSubmodelElement(new Property("Weight","1040 kg"));
+            //grapperArmlength
+                mechanicalData.addSubmodelElement(new Property("grapperArmlength","880 mm"));
+            //handlingCapacity
+                mechanicalData.addSubmodelElement(new Property("handlingCapacity","60 kg"));
+            //range
+                mechanicalData.addSubmodelElement(new Property("range","N/A"));
+            //maximumPayload
+                mechanicalData.addSubmodelElement(new Property("maximumPayload","60 kg"));
+            //repeatability
+                mechanicalData.addSubmodelElement(new Property("repeatability","0,05mm"));
+
+    //SMC: colors
+
+        //add Properties for SMC mechanicalData
+
+            //colorVariant1
+                mechanicalData_colors.addSubmodelElement(new Property("colorVariant1","white"));
+            //colorVariant2
+                mechanicalData_colors.addSubmodelElement(new Property("colorVariant2","orange"));
+
+        //add SMC colors to SMC mechanicalData
+            mechanicalData.addSubmodelElement(mechanicalData_colors);
+
+    //SMC: dimensions:
+
+        //add Properties for SMC mechanicalData
+
+            //DrawingWithDimensions
+            //add a File with Dimensions to SMC dimensions
+                File dimensions_file = new File("https://tinyurl.com/2qrwujvt","application/pdf");
+                mechanicalData_dimensions.addSubmodelElement(dimensions_file);
+            //totalHeight
+                mechanicalData_colors.addSubmodelElement(new Property("totalHeight","1720 mm"));
+            //totalWidth
+                mechanicalData_colors.addSubmodelElement(new Property("totalWidth","1956 mm"));
+            //totalDepth
+                mechanicalData_colors.addSubmodelElement(new Property("totalDepth","1956"));
+            //baseArea
+                mechanicalData_colors.addSubmodelElement(new Property("baseArea","920 x 640 mm"));
+
+        //add SMC dimensions to SMC mechanicalData
+            mechanicalData.addSubmodelElement(mechanicalData_dimensions);
+
+    //SCM: axles
+
+        //add Properties for SMC axles
+
+            //number of axes
+                mechanicalData_axles.addSubmodelElement(new Property("number of axes","6"));
+            //SMC Axle 1
+                SubmodelElementCollection axle01 = new SubmodelElementCollection("axle 1");
+            //SMC Axle 2
+                SubmodelElementCollection axle02 = new SubmodelElementCollection("axle 2");
+            //SMC Axle 3
+                SubmodelElementCollection axle03 = new SubmodelElementCollection("axle 3");
+            //SMC Axle 4
+                SubmodelElementCollection axle04 = new SubmodelElementCollection("axle 4");
+            //SMC Axle 5
+                SubmodelElementCollection axle05 = new SubmodelElementCollection("axle 5");
+            //SMC Axle 6
+                SubmodelElementCollection axle06 = new SubmodelElementCollection("axle 6");
+            //Figure axes with numbering
+
+    //SMC: axle01
+
+        //add Properties for SMC axle01
+
+            //wrist torque
+                axle01.addSubmodelElement(new Property("wrist torque","N/A"));
+            //rotary motion in degrees per axis
+                axle01.addSubmodelElement(new Property("rotary motion in degrees per axis","+165° to -165°"));
+            //Workspace_axle01
+                axle01.addSubmodelElement(new Property("Workspace_axle01","N/A"));
+            //speed
+                axle01.addSubmodelElement(new Property("speed","150°/s"));
+            //braking duration
+                axle01.addSubmodelElement(new Property("braking duration","N/A"));
+            //acceleration
+                axle01.addSubmodelElement(new Property("acceleration","N/A"));
+
+        //add SMC axle01 to SMC axles
+            mechanicalData_axles.addSubmodelElement(axle01);
+
+    //SMC: axle02
+
+        //add Properties for SMC axle02
+
+            //wrist torque
+                axle02.addSubmodelElement(new Property("wrist torque","N/A"));
+            //rotary motion in degrees per axis
+                axle02.addSubmodelElement(new Property("rotary motion in degrees per axis","+95° to -70°"));
+            //Workspace_axle01
+                axle02.addSubmodelElement(new Property("Workspace_axle01","N/A"));
+            //speed
+                axle02.addSubmodelElement(new Property("speed","120°/s"));
+            //braking duration
+                axle02.addSubmodelElement(new Property("braking duration","N/A"));
+            //acceleration
+                axle02.addSubmodelElement(new Property("acceleration","N/A"));
+
+        //add SMC axle02 to SMC axles
+        mechanicalData_axles.addSubmodelElement(axle02);
+
+    //SMC: axle03
+
+        //add Properties for SMC axle03
+
+            //wrist torque
+                axle03.addSubmodelElement(new Property("wrist torque","N/A"));
+            //rotary motion in degrees per axis
+                axle03.addSubmodelElement(new Property("rotary motion in degrees per axis","+65° to -70°"));
+            //Workspace_axle01
+                axle03.addSubmodelElement(new Property("Workspace_axle01","N/A"));
+            //speed
+                axle03.addSubmodelElement(new Property("speed","120°/s"));
+            //braking duration
+                axle03.addSubmodelElement(new Property("braking duration","N/A"));
+            //acceleration
+                axle03.addSubmodelElement(new Property("acceleration","N/A"));
+
+        //add SMC axle03 to SMC axles
+            mechanicalData_axles.addSubmodelElement(axle03);
+
+    //SMC: axle04
+
+        //add Properties for SMC axle04
+
+            //wrist torque
+                axle04.addSubmodelElement(new Property("wrist torque","N/A"));
+            //rotary motion in degrees per axis
+                axle04.addSubmodelElement(new Property("rotary motion in degrees per axis","+200° to -200°"));
+            //Workspace_axle01
+                axle04.addSubmodelElement(new Property("Workspace_axle01","N/A"));
+            //speed
+                axle04.addSubmodelElement(new Property("speed","225°/s"));
+            //braking duration
+                axle04.addSubmodelElement(new Property("braking duration","N/A"));
+            //acceleration
+                axle04.addSubmodelElement(new Property("acceleration","N/A"));
+
+        //add SMC axle04 to SMC axles
+        mechanicalData_axles.addSubmodelElement(axle04);
+
+    //SMC: axle05
+
+        //add Properties for SMC axle05
+
+            //wrist torque
+                axle05.addSubmodelElement(new Property("wrist torque","N/A"));
+            //rotary motion in degrees per axis
+                axle05.addSubmodelElement(new Property("rotary motion in degrees per axis","+120° to -120°"));
+            //Workspace_axle01
+                axle05.addSubmodelElement(new Property("Workspace_axle01","N/A"));
+            //speed
+                axle05.addSubmodelElement(new Property("speed","250°"));
+            //braking duration
+                axle05.addSubmodelElement(new Property("braking duration","N/A"));
+            //acceleration
+                axle05.addSubmodelElement(new Property("acceleration","N/A"));
+
+        //add SMC axle05 to SMC axles
+        mechanicalData_axles.addSubmodelElement(axle05);
+
+    //SMC: axle06
+
+        //add Properties for SMC axle06
+
+            //wrist torque
+                axle06.addSubmodelElement(new Property("wrist torque","N/A"));
+            //rotary motion in degrees per axis
+                axle06.addSubmodelElement(new Property("rotary motion in degrees per axis","+400° to -400°"));
+            //Workspace_axle01
+                axle06.addSubmodelElement(new Property("Workspace_axle01","N/A"));
+            //speed
+                axle06.addSubmodelElement(new Property("speed","330°/s"));
+            //braking duration
+                axle06.addSubmodelElement(new Property("braking duration","N/A"));
+            //acceleration
+                axle06.addSubmodelElement(new Property("acceleration","N/A"));
+
+        //add SMC axle06 to SMC axles
+            mechanicalData_axles.addSubmodelElement(axle06);
+
+        //add SMC Axles to SMC mechanicalData
+            mechanicalData.addSubmodelElement(mechanicalData_axles);
+        
+        //add SMC mechanicalData to SMC MainSection
+            mainSection_technicalProperties.addSubmodelElement(mechanicalData);
+
+
+    //SMC: electricalData
+
+        //add Properties for SMC electricalData
+
+            //Power consumption
+                electricalData.addSubmodelElement(new Property("Power consumption","N/A"));
+            //Operation voltage
+                electricalData.addSubmodelElement(new Property("Operation voltage","200 - 600 V"));
+            //Control voltage
+                electricalData.addSubmodelElement(new Property("Control voltage","N/A"));
+            //Main voltage
+                electricalData.addSubmodelElement(new Property("Main voltage","N/A"));
+            //Protection class
+                electricalData.addSubmodelElement(new Property("Protection class","IP54"));
+            //Maximum current
+                electricalData.addSubmodelElement(new Property("Maximum current","N/A"));
+            //Power factor
+                electricalData.addSubmodelElement(new Property("Power factor","N/A"));
+
+        //add SMC mechanicalData to SMC MainSection
+            mainSection_technicalProperties.addSubmodelElement(electricalData);
+
+
+    //SMC SubSection
+
+        //add Properties for SubSection
+
+            //SMC maintenance and service
+                SubmodelElementCollection maintenanceAndService = new SubmodelElementCollection("MaintenanceAndService");
+            //SMC security
+                SubmodelElementCollection security = new SubmodelElementCollection("Security");
+            //SMC connectors
+                SubmodelElementCollection connectors = new SubmodelElementCollection("Connectors");
+            //SMC connectors
+                SubmodelElementCollection controlAndSoftware = new SubmodelElementCollection("ControlAndSoftware");
+            //SMC environmentData
+                SubmodelElementCollection environmentData = new SubmodelElementCollection("EnvironmentData");
+            //SMC Sensors and actuators
+                SubmodelElementCollection SensorsAndActuators = new SubmodelElementCollection("SensorsAndActuators");
+
+    //SMC maintenance and service
+
+        //add Properties
+
+            //Maintenance Intervals
+                electricalData.addSubmodelElement(new Property("MaintenanceIntervals","N/A"));
+            //Spare parts supply
+                electricalData.addSubmodelElement(new Property("SparePartsSupply","N/A"));
+            //Training
+                electricalData.addSubmodelElement(new Property("Training","N/A"));
+            //Support
+                electricalData.addSubmodelElement(new Property("Support","N/A"));
+            //Warranty
+                electricalData.addSubmodelElement(new Property("Warranty","N/A"));
+
+        //add SMC maintenance and service to SMC Subsection
+            subSection_technicalProperties.addSubmodelElement(maintenanceAndService);
+
+    //SMC security
+
+        //add Properties
+        
+            //Safety functions
+                electricalData.addSubmodelElement(new Property("SafetyFunctions","N/A"));
+            //Safety certifications
+                electricalData.addSubmodelElement(new Property("Safety certifications","N/A"));
+
+      //add SMC security to SMC Subsection
+        subSection_technicalProperties.addSubmodelElement(security);
+
+    //SMC Connectors
+
+        //add Properties
+        
+            //SMC Connector1
+                SubmodelElementCollection connector01 = new SubmodelElementCollection("Connector01");
+                connectors.addSubmodelElement(connector01);
+            //SMC Connector2
+                SubmodelElementCollection connector02 = new SubmodelElementCollection("Connector02");
+                connectors.addSubmodelElement(connector02);
+
+        //add SMC Connectors to SMC Subsection
+            subSection_technicalProperties.addSubmodelElement(connectors);
+
+
+    //SMC controlAndSoftware
+
+        //add Properties
+        
+            //Control Type
+                electricalData.addSubmodelElement(new Property("Control type","Pamel mounted controller"));
+            //Programming language
+                electricalData.addSubmodelElement(new Property("Programming language","N/A"));
+            //Memory size
+                electricalData.addSubmodelElement(new Property("Memory size","N/A"));
+            //Network capability
+                electricalData.addSubmodelElement(new Property("Network capability","N/A"));
+            //I/O Interfaces
+                electricalData.addSubmodelElement(new Property("I/O Interfaces","N/A"));
+            //Communication interface
+                electricalData.addSubmodelElement(new Property("Communication interface","panel mounted"));
+            //Operating System
+                electricalData.addSubmodelElement(new Property("Operating System","N/A"));
+
+        //add SMC controlAndSoftware to SMC Subsection
+            subSection_technicalProperties.addSubmodelElement(controlAndSoftware);
+
+
+    //SMC Environment Data
+
+        //add Properties
+        
+            //Sound pressure
+                electricalData.addSubmodelElement(new Property("Sound pressure","Pamel mounted controller"));
+            //Protection Class
+                electricalData.addSubmodelElement(new Property("Protection Class","IP54"));
+            //Humidity
+                electricalData.addSubmodelElement(new Property("Humidity","N/A"));
+            //SMC Ambient Temperature
+                SubmodelElementCollection ambientTemperatures = new SubmodelElementCollection("Ambient Temperatures");
+                // add Range: Ambient temperature
+                    Range ambientTemperature = new Range("Ambient Temperature", ValueType.String);
+                    ambientTemperature.setValue(new RangeValue("+5°C","+45°C"));
+                    ambientTemperatures.addSubmodelElement(ambientTemperature);
+                    
+                //add SMC Ambient temperature to SMC Environment Data      
+                    environmentData.addSubmodelElement(ambientTemperatures);
+
+        //add SMC Environment Data to SMC Subsection
+            subSection_technicalProperties.addSubmodelElement(environmentData);
+
+
+    //SMC Sensors and Actuators
+
+        //add Properties
+        
+            //SMC Programmability
+                SubmodelElementCollection programmability = new SubmodelElementCollection("Programmability");
+            //SMC Sensors
+                SubmodelElementCollection sensors = new SubmodelElementCollection("Sensors");
+            //SMC Actuators
+                SubmodelElementCollection actuators = new SubmodelElementCollection("Actuators");
+
+        //add SMC programmability Data to SMC SensorsAndActuators
+              SensorsAndActuators.addSubmodelElement(programmability);
+        //add SMC sensors Data to SMC SensorsAndActuators
+              SensorsAndActuators.addSubmodelElement(sensors);
+        //add SMC actuators Data to SMC SensorsAndActuators
+              SensorsAndActuators.addSubmodelElement(actuators);
+
+        //add SMC Environment Data to SMC Subsection
+            subSection_technicalProperties.addSubmodelElement(SensorsAndActuators);
+
+
+
+        //add SMC MainSection to SMC Technical Properties
+            technicalProperties.addSubmodelElement(mainSection_technicalProperties);
+        //add SMC SubSection to SMC Technical Properties
+            technicalProperties.addSubmodelElement(subSection_technicalProperties);
+        //add SMC technical Properties to SM Technical Data
+            technicalData.addSubmodelElement(technicalProperties);
+
+            
+        return technicalData;
+
+        }
+
+}
