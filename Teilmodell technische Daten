@@ -1,1 +1,329 @@
-test
+package org.example;
+
+
+import org.eclipse.basyx.submodel.metamodel.api.identifier.IdentifierType;
+import org.eclipse.basyx.submodel.metamodel.map.Submodel;
+import org.eclipse.basyx.submodel.metamodel.map.identifier.Identifier;
+import org.eclipse.basyx.submodel.metamodel.map.qualifier.LangString;
+import org.eclipse.basyx.submodel.metamodel.map.qualifier.LangStrings;
+import org.eclipse.basyx.submodel.metamodel.map.submodelelement.SubmodelElementCollection;
+import org.eclipse.basyx.submodel.metamodel.map.submodelelement.dataelement.File;
+import org.eclipse.basyx.submodel.metamodel.map.submodelelement.dataelement.MultiLanguageProperty;
+import org.eclipse.basyx.submodel.metamodel.map.submodelelement.dataelement.property.Property;
+import org.eclipse.basyx.submodel.types.digitalnameplate.DigitalNameplateSubmodel;
+import org.eclipse.basyx.submodel.types.digitalnameplate.submodelelementcollections.address.Address;
+import java.time.LocalDate;
+
+public class Nameplate {
+
+    public static Submodel createSubmodelNameplate() {
+
+
+    //Submodel: DigitalNameplate
+
+        //add Properties for SM Nameplate:
+
+            //add Information for SM DigitalNameplate for the BaSyx Template
+                String yearOfConstruction = "2022";
+                LangString langString_manufacurerName = new LangString("de","ABB");
+                LangString langString_manufacurerProductDesignation = new LangString("de","Allround-Roboter für Handhabungs- und Bearbeitungsaufgaben");
+                LangString langString_manufacurerProductFamily = new LangString("de","Knickarmroboter");
+                Address address = new Address(new LangString("de","Kallstadter Straße 1"),new LangString("de","68309"),new LangString("de","Mannheim"),new LangString("de","Deutschland"));
+                Identifier Identifier_Nameplate = new Identifier(IdentifierType.CUSTOM,"IDENTIFIER_SM_NAMEPLATE");
+
+        //create SM DigitalNameplate with BaSyx Template
+            DigitalNameplateSubmodel digitalNameplate = new DigitalNameplateSubmodel("Nameplate",Identifier_Nameplate,langString_manufacurerName,langString_manufacurerProductDesignation,address,langString_manufacurerProductFamily,yearOfConstruction);
+
+        //Adding required missing Properties to SM DigitalNameplate
+
+            //SerialNumber
+                digitalNameplate.setSerialNumber("1234733");
+
+            //URIOfTheProduct
+                digitalNameplate.addSubmodelElement(new Property("URIOfTheProduct","TEXT"));
+
+
+        //Adding additional Properties to SM DigitalNameplate:
+
+            //ManufacturerProductRoot
+                MultiLanguageProperty mlp_ManufacturerProductRoot = new MultiLanguageProperty("ManufacturerProductRoot");
+                mlp_ManufacturerProductRoot.setValue(new LangStrings("de","TEXT"));
+                mlp_ManufacturerProductRoot.setDescription(new LangStrings("de","ManufacturerProductRoot"));
+                digitalNameplate.addSubmodelElement(mlp_ManufacturerProductRoot);
+
+            //ManufacturerProductType
+                MultiLanguageProperty mlp_ManufacturerProductType = new MultiLanguageProperty("ManufacturerProductType");
+                mlp_ManufacturerProductType.setValue(new LangStrings("de","TEXT"));
+                mlp_ManufacturerProductType.setDescription(new LangStrings("de","ManufacturerProductType"));
+                digitalNameplate.addSubmodelElement(mlp_ManufacturerProductType);
+
+            //OrderCodeofManufacturer
+                MultiLanguageProperty mlp_OrderCodeofManufacturer = new MultiLanguageProperty("OrderCodeofManufacturer");
+                mlp_OrderCodeofManufacturer.setValue(new LangStrings("de","TEXT"));
+                mlp_OrderCodeofManufacturer.setDescription(new LangStrings("de","OrderCodeofManufacturer"));
+                digitalNameplate.addSubmodelElement(mlp_OrderCodeofManufacturer);
+
+            //ProductArticleNumberOfManufacturer
+                MultiLanguageProperty mlp_ProductArticleNumberOfManufacturer = new MultiLanguageProperty("ProductArticleNumberOfManufacturer");
+                mlp_ProductArticleNumberOfManufacturer.setValue(new LangStrings("de","TEXT"));
+                mlp_ProductArticleNumberOfManufacturer.setDescription(new LangStrings("de","ProductArticleNumberOfManufacturer"));
+                digitalNameplate.addSubmodelElement(mlp_ProductArticleNumberOfManufacturer);
+
+            //DateOfManufacture
+                LocalDate digitalNameplate_dateOfManufacture = LocalDate.of(2021,8,24);
+                Property property_digitalNameplate_DateOfManufacture = new Property("dateOfManufacture",digitalNameplate_dateOfManufacture.toString());
+                digitalNameplate.addSubmodelElement(property_digitalNameplate_DateOfManufacture);
+
+            //HardwareVersion
+                MultiLanguageProperty mlp_HardwareVersion = new MultiLanguageProperty("HardwareVersion");
+                mlp_HardwareVersion.setValue(new LangStrings("de","v1.0.0"));
+                mlp_HardwareVersion.setDescription(new LangStrings("de","Hardware Version"));
+                digitalNameplate.addSubmodelElement(mlp_HardwareVersion);
+
+            //FirmwareVersion
+                MultiLanguageProperty mlp_FirmwareVersion = new MultiLanguageProperty("FirmwareVersion");
+                mlp_FirmwareVersion.setValue(new LangStrings("en","v1.0.0"));
+                mlp_FirmwareVersion.setDescription(new LangStrings("en","Firmware Version"));
+                digitalNameplate.addSubmodelElement(mlp_FirmwareVersion);
+
+            //SoftwareVersion
+                MultiLanguageProperty mlp_SoftwareVersion = new MultiLanguageProperty("SoftwareVersion");
+                mlp_SoftwareVersion.setValue(new LangStrings("en", "v1.2.3"));
+                mlp_SoftwareVersion.setDescription(new LangStrings("en", "Software version"));
+                digitalNameplate.addSubmodelElement(mlp_SoftwareVersion);
+
+            //CountryOfOrigin
+                MultiLanguageProperty mlp_CountryOfOrigin = new MultiLanguageProperty("CountryOfOrigin");
+                mlp_CountryOfOrigin.setValue(new LangStrings("en", "Land"));
+                mlp_CountryOfOrigin.setDescription(new LangStrings("en", "Country of Origin"));
+                digitalNameplate.addSubmodelElement(mlp_CountryOfOrigin);
+
+            //CompanyLogo
+
+
+            //SMC Marking
+                SubmodelElementCollection markings = new SubmodelElementCollection("Markings");
+
+            //SMC Contactinformations
+                SubmodelElementCollection contactInformations = new SubmodelElementCollection("ContactInformations");
+
+            //SMC AssetSpecificProperties
+                SubmodelElementCollection assetSpecificProperties = new SubmodelElementCollection("AssetSpecificProperties");
+
+    //---------------------------------------------------------SMC ContactInformations start--------------------------------------------
+
+    //SMC: ContactInformations
+
+        //add Properties for SMC ContactInformations:
+
+            //SMC ContactInformation01
+                SubmodelElementCollection contactInformation01 = new SubmodelElementCollection("ContactInformation01");
+
+    //SMC: ContactInformation01
+
+        //add Properties for SMC ContactInformation01:
+
+            //RoleOfContactPerson
+                contactInformation01.addSubmodelElement(new Property("RoleOfContactPerson","TEXT(IRDI)"));
+            //NationalCode
+                contactInformation01.addSubmodelElement(new Property("NationalCode","DE"));
+            //Language
+                contactInformation01.addSubmodelElement(new Property("Language","DE"));
+            //TimeZone
+                contactInformation01.addSubmodelElement(new Property("TimeZone","text"));
+            //CityTown
+                contactInformation01.addSubmodelElement(new Property("CityTown","text"));
+            //Company
+                contactInformation01.addSubmodelElement(new Property("Company","text"));
+            //Department
+                contactInformation01.addSubmodelElement(new Property("Department","text"));
+            //Street
+                contactInformation01.addSubmodelElement(new Property("Street","text"));
+            //Zipcode
+                contactInformation01.addSubmodelElement(new Property("Zipcode","text"));
+            //POBox
+                contactInformation01.addSubmodelElement(new Property("POBox","text"));
+            //ZipCodeofPOBox
+                contactInformation01.addSubmodelElement(new Property("ZipCodeofPOBox","text"));
+            //StateCounty
+                contactInformation01.addSubmodelElement(new Property("StateCounty","text"));
+            //NameOfContact
+                contactInformation01.addSubmodelElement(new Property("NameOfContact","text"));
+            //FirstName
+                contactInformation01.addSubmodelElement(new Property("FirstName","text"));
+            //MiddleNames
+                contactInformation01.addSubmodelElement(new Property("MiddleNames","text"));
+            //Title
+                contactInformation01.addSubmodelElement(new Property("Title","text"));
+            //AcademicTitle
+                contactInformation01.addSubmodelElement(new Property("AcademicTitle","text"));
+            //FurtherDetailsOfContact
+                contactInformation01.addSubmodelElement(new Property("FurtherDetailsOfContact","text"));
+            //AddressOfAdditionalLink
+                contactInformation01.addSubmodelElement(new Property("AddressOfAdditionalLink","text"));
+
+            //SCM Phone01
+                SubmodelElementCollection phone01 = new SubmodelElementCollection("Phone01");
+            //SCM Phone01
+                SubmodelElementCollection fax01 = new SubmodelElementCollection("Fax01");
+            //SCM Phone01
+                SubmodelElementCollection eMail01 = new SubmodelElementCollection("Email01");
+            //SCM Phone01
+                SubmodelElementCollection ipCommunication01 = new SubmodelElementCollection("IPCommunication01");
+
+     //SCM: Phone01
+
+        //add Properties for SMC phone01:
+
+            //TelephoneNumber
+                phone01.addSubmodelElement(new Property("TelephoneNumber","text"));
+            //TypeOfTelephone
+                phone01.addSubmodelElement(new Property("TypeOfTelephone","ENUMERATION SIEHE DOKUMENT"));
+            //AvailableTime
+                MultiLanguageProperty mlp_Phone01_AvailableTime01 = new MultiLanguageProperty("AvailableTime");
+                //AvailableTime - add Value in de & en
+                    LangStrings email01_availableTimeValue = new LangStrings(new LangString("de","Montag - Freitag 08:00 bis 16:00 Uhr"));
+                    email01_availableTimeValue.add(new LangString("en","Monday - Friday 8:00 a.m. to 4:00 p.m"));
+                //AvailableTime - add Description in de & en
+                    LangStrings email01_availableTimeDescription = new LangStrings(new LangString("de","Verfügbare Zeit"));
+                    email01_availableTimeDescription.add(new LangString("en","Available Time"));
+                //AvailableTime - add Value & Description to MLP
+                    mlp_Phone01_AvailableTime01.setValue(email01_availableTimeValue);
+                    mlp_Phone01_AvailableTime01.setDescription(email01_availableTimeDescription);
+                //AvailableTime - add MLP to SMC Phone01
+                    phone01.addSubmodelElement(mlp_Phone01_AvailableTime01);
+
+        //add phone01 SMC to contactInformation01
+            contactInformation01.addSubmodelElement(phone01);
+
+    //SCM: fax01
+
+        //add Properties for SMC fax01:
+
+            //FaxNumber
+                fax01.addSubmodelElement(new Property("FaxNumber","text"));
+            //TypeOfFaxNumber
+                fax01.addSubmodelElement(new Property("TypeOfFaxNumber","ENNUMERATION"));
+
+        //add fax01 SMC to contactInformation01
+            contactInformation01.addSubmodelElement(fax01);
+
+
+    //SCM: eMail01
+
+        //add Properties for SMC eMail01:
+
+            //EmailAdress
+                eMail01.addSubmodelElement(new Property("EmailAdress","text"));
+            //TypeOfEmailAdress
+                eMail01.addSubmodelElement(new Property("TypeOfEmailAdress","ENNUMERATION"));
+
+        //add eMail01 SMC to contactInformation01
+            contactInformation01.addSubmodelElement(eMail01);
+
+    //SCM: ipCommunication01
+
+        //add Properties for SMC ipCommunication01:
+
+            //AddressOfAdditionalLink
+                ipCommunication01.addSubmodelElement(new Property("AddressOfAdditionalLink","text"));
+            //TypeOfEmailCommunication
+                ipCommunication01.addSubmodelElement(new Property("TypeOfEmailCommunication","ENNUMERATION"));
+            //AvailableTime
+                MultiLanguageProperty mlp_IPCommunication_AvailableTime01 = new MultiLanguageProperty("AvailableTime");
+                //AvailableTime - add Value in de & en
+                    LangStrings ipCommunication_availableTimeValue = new LangStrings(new LangString("de","Montag - Freitag 08:00 bis 16:00 Uhr"));
+                    ipCommunication_availableTimeValue.add(new LangString("en","Monday - Friday 8:00 a.m. to 4:00 p.m"));
+                //AvailableTime - add Description in de & en
+                    LangStrings ipCommunication_availableTimeDescripion = new LangStrings(new LangString("de","Verfügbare Zeit"));
+                    ipCommunication_availableTimeDescripion.add(new LangString("en","Available Time"));
+                //AvailableTime - add Value & Description to MLP
+                    mlp_IPCommunication_AvailableTime01.setValue(ipCommunication_availableTimeValue);
+                    mlp_IPCommunication_AvailableTime01.setDescription(ipCommunication_availableTimeDescripion);
+                //AvailableTime - add MLP to SMC Phone01
+                    eMail01.addSubmodelElement(mlp_IPCommunication_AvailableTime01);
+
+        //add ipCommunication01 SMC to contactInformation01
+            contactInformation01.addSubmodelElement(ipCommunication01);
+
+        //add contactInformation01 to SMC contactInformations
+            contactInformations.addSubmodelElement(contactInformation01);
+
+        //add contactinformations to SM digitalNameplate
+            digitalNameplate.addSubmodelElement(contactInformations);
+
+    //---------------------------------------------------------SMC ContactInformations end--------------------------------------------
+
+    //---------------------------------------------------------SMC Markings start--------------------------------------------
+
+    //SCM: Markings
+
+        //add Properties for SMC Markings:
+
+            //SMC Marking01
+            SubmodelElementCollection marking01 = new SubmodelElementCollection("Marking01");
+
+    //SMC: Marking01
+
+        //add Properties for SMC Marking01:
+
+            //MarkingName
+                marking01.addSubmodelElement(new Property("MarkingName","text"));
+
+            //MarkingName
+                marking01.addSubmodelElement(new Property("DesignationOfCertificateOrApproval","IRDI"));
+
+            //IssueDate
+                LocalDate marking01_IssueDate = LocalDate.of(2021,8,24);
+                Property property_marking01_IssueDate = new Property("dateOfManufacture",marking01_IssueDate.toString());
+                marking01.addSubmodelElement(property_marking01_IssueDate);
+
+            //IssueDate
+                LocalDate marking01_ExpiryDate = LocalDate.of(2021,8,24);
+                Property property_marking01_ExpiryDate = new Property("dateOfManufacture",marking01_ExpiryDate.toString());
+                marking01.addSubmodelElement(property_marking01_ExpiryDate);
+
+            //MarkingFile
+
+            //MarkingAdditionalText01
+                marking01.addSubmodelElement(new Property("MarkingAdditionalText01","TEXT"));
+
+        //add Marking SMC to Markings
+            markings.addSubmodelElement(marking01);
+
+        //add Markings to SM digitalNameplate
+            digitalNameplate.addSubmodelElement(markings);
+
+
+
+    //---------------------------------------------------------SMC Markings end--------------------------------------------
+
+
+    //---------------------------------------------------------SMC assetSpecificProperties start--------------------------------------------
+
+    // SCM: Markings
+
+        //add Properties for SMC Markings:
+
+
+
+
+        //add SMC to the SM:
+        digitalNameplate.addSubmodelElement(assetSpecificProperties);
+
+    //---------------------------------------------------------SMC assetSpecificProperties end--------------------------------------------
+
+
+
+
+
+return digitalNameplate;
+
+
+
+
+    }
+
+
+
+}
