@@ -54,7 +54,7 @@ public class TechnicalData {
                 Reference semanticId_manufacutrerName = new Reference(new Identifier(IdentifierType.IRDI,"0173-1#02-AAO677#002"), KeyElements.CONCEPTDESCRIPTION,true);
                 manufacuterName.setSemanticId(semanticId_manufacutrerName);
                 generalInformation.addSubmodelElement(manufacuterName);
-                
+
 
             //ManufacturerProductDesign
                 MultiLanguageProperty mlp_ManufacturerProductDesign = new MultiLanguageProperty("MLP_ManufacturerProductDesign");
@@ -146,7 +146,7 @@ public class TechnicalData {
                 SubmodelElementCollection mechanicalData = new SubmodelElementCollection("Mechanical Data");
             //SMC electricalData
                 SubmodelElementCollection electricalData = new SubmodelElementCollection("Electrical Data");
-            
+
 
     //SCM: mechanicalData
 
@@ -188,9 +188,7 @@ public class TechnicalData {
         //add Properties for SMC mechanicalData
 
             //DrawingWithDimensions
-            //add a File with Dimensions to SMC dimensions
-                File dimensions_file = new File("https://tinyurl.com/2qrwujvt","application/pdf");
-                mechanicalData_dimensions.addSubmodelElement(dimensions_file);
+
             //totalHeight
                 mechanicalData_colors.addSubmodelElement(new Property("totalHeight","1720 mm"));
             //totalWidth
@@ -345,7 +343,7 @@ public class TechnicalData {
 
         //add SMC Axles to SMC mechanicalData
             mechanicalData.addSubmodelElement(mechanicalData_axles);
-        
+
         //add SMC mechanicalData to SMC MainSection
             mainSection_technicalProperties.addSubmodelElement(mechanicalData);
 
@@ -411,7 +409,7 @@ public class TechnicalData {
     //SMC security
 
         //add Properties
-        
+
             //Safety functions
                 electricalData.addSubmodelElement(new Property("SafetyFunctions","N/A"));
             //Safety certifications
@@ -423,7 +421,7 @@ public class TechnicalData {
     //SMC Connectors
 
         //add Properties
-        
+
             //SMC Connector1
                 SubmodelElementCollection connector01 = new SubmodelElementCollection("Connector01");
                 connectors.addSubmodelElement(connector01);
@@ -438,7 +436,7 @@ public class TechnicalData {
     //SMC controlAndSoftware
 
         //add Properties
-        
+
             //Control Type
                 electricalData.addSubmodelElement(new Property("Control type","Pamel mounted controller"));
             //Programming language
@@ -461,7 +459,7 @@ public class TechnicalData {
     //SMC Environment Data
 
         //add Properties
-        
+
             //Sound pressure
                 electricalData.addSubmodelElement(new Property("Sound pressure","Pamel mounted controller"));
             //Protection Class
@@ -474,8 +472,8 @@ public class TechnicalData {
                     Range ambientTemperature = new Range("Ambient Temperature", ValueType.String);
                     ambientTemperature.setValue(new RangeValue("+5°C","+45°C"));
                     ambientTemperatures.addSubmodelElement(ambientTemperature);
-                    
-                //add SMC Ambient temperature to SMC Environment Data      
+
+                //add SMC Ambient temperature to SMC Environment Data
                     environmentData.addSubmodelElement(ambientTemperatures);
 
         //add SMC Environment Data to SMC Subsection
@@ -485,7 +483,7 @@ public class TechnicalData {
     //SMC Sensors and Actuators
 
         //add Properties
-        
+
             //SMC Programmability
                 SubmodelElementCollection programmability = new SubmodelElementCollection("Programmability");
             //SMC Sensors
@@ -512,7 +510,7 @@ public class TechnicalData {
         //add SMC technical Properties to SM Technical Data
             technicalData.addSubmodelElement(technicalProperties);
 
-            
+
         return technicalData;
 
         }
